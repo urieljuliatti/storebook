@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Author, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'validating presence of name' do
+    it 'expect to be valid' do
+      expect(Author.new(name: 'Uriel')).to be_valid
+    end
+  end
 end
