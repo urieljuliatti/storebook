@@ -12,7 +12,7 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/books", type: :request do
+RSpec.describe "/api/v1/books", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.
@@ -35,7 +35,7 @@ RSpec.describe "/books", type: :request do
   describe "GET /index" do
     it "renders a successful response" do
       Book.create! valid_attributes
-      get books_url, headers: valid_headers, as: :json
+      get api_v1_books_url, headers: valid_headers, as: :json
       expect(response).to be_successful
     end
   end
@@ -43,7 +43,7 @@ RSpec.describe "/books", type: :request do
   describe "GET /show" do
     it "renders a successful response" do
       book = Book.create! valid_attributes
-      get book_url(book), as: :json
+      get api_v1_book_url(book), as: :json
       expect(response).to be_successful
     end
   end
@@ -52,13 +52,13 @@ RSpec.describe "/books", type: :request do
     context "with valid parameters" do
       it "creates a new Book" do
         expect {
-          post books_url,
+          post api_v1_books_url,
                params: { book: valid_attributes }, headers: valid_headers, as: :json
         }.to change(Book, :count).by(1)
       end
 
       it "renders a JSON response with the new book" do
-        post books_url,
+        post api_v1_books_url,
              params: { book: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
@@ -68,13 +68,13 @@ RSpec.describe "/books", type: :request do
     context "with invalid parameters" do
       it "does not create a new Book" do
         expect {
-          post books_url,
+          post api_v1_books_url,
                params: { book: invalid_attributes }, as: :json
         }.to change(Book, :count).by(0)
       end
 
       it "renders a JSON response with errors for the new book" do
-        post books_url,
+        post api_v1_books_url,
              params: { book: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to match(a_string_including("application/json"))
@@ -90,7 +90,7 @@ RSpec.describe "/books", type: :request do
 
       it "updates the requested book" do
         book = Book.create! valid_attributes
-        patch book_url(book),
+        patch api_v1_book_url(book),
               params: { book: new_attributes }, headers: valid_headers, as: :json
         book.reload
         skip("Add assertions for updated state")
@@ -98,7 +98,7 @@ RSpec.describe "/books", type: :request do
 
       it "renders a JSON response with the book" do
         book = Book.create! valid_attributes
-        patch book_url(book),
+        patch api_v1_book_url(book),
               params: { book: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(a_string_including("application/json"))
@@ -108,7 +108,7 @@ RSpec.describe "/books", type: :request do
     context "with invalid parameters" do
       it "renders a JSON response with errors for the book" do
         book = Book.create! valid_attributes
-        patch book_url(book),
+        patch api_v1_book_url(book),
               params: { book: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to match(a_string_including("application/json"))
@@ -120,7 +120,7 @@ RSpec.describe "/books", type: :request do
     it "destroys the requested book" do
       book = Book.create! valid_attributes
       expect {
-        delete book_url(book), headers: valid_headers, as: :json
+        delete api_v1_book_url(book), headers: valid_headers, as: :json
       }.to change(Book, :count).by(-1)
     end
   end
