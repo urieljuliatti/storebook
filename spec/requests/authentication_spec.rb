@@ -17,6 +17,7 @@ RSpec.describe "/login", type: :request do
       user = User.create! user_params
       post "/login", :params => {:email => @user.email, :password => @user.password }, :headers => headers
       expect(response.content_type).to eq("application/json; charset=utf-8")
+      expect(JSON.parse(response.body)['token']).to_not be_nil
       expect(response).to have_http_status(:ok)
     end
     it "renders an error response" do
@@ -24,6 +25,7 @@ RSpec.describe "/login", type: :request do
 
       post "/login", :params => {:email => @user.email, :password => "123" }, :headers => headers
       expect(response.content_type).to eq("application/json; charset=utf-8")
+      expect(JSON.parse(response.body)['token']).to be_nil
       expect(response).to have_http_status(:unauthorized)
     end
   end
