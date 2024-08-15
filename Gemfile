@@ -51,3 +51,4 @@ end
 
 gem 'rack-cors'
 gem 'devise'
+gem 'jwt'
