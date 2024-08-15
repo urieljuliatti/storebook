@@ -13,25 +13,27 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/api/v1/authors", type: :request do
-  # This should return the minimal set of attributes required to create a valid
-  # Author. As you add validations to Author, be sure to
-  # adjust the attributes here as well.
+
   let(:valid_attributes) {
-    #skip("Add a hash of attributes valid for your model")
     {"name"=>"Fulano"}
   }
 
   let(:invalid_attributes) {
-    #skip("Add a hash of attributes invalid for your model")
     {"name"=>""}
   }
 
-  # This should return the minimal set of values that should be in the headers
-  # in order to pass any filters (e.g. authentication) defined in
-  # AuthorsController, or in your router and rack
-  # middleware. Be sure to keep this updated too.
+  let(:user_params) {
+    {:email => "admin@email.com", :password => "123456"}
+  }
+
+  let(:token) {
+    @user = User.create user_params
+    headers = { "ACCEPT" => "application/json" }
+    post "/login", :params => {:email => @user.email, :password => @user.password }, :headers => headers
+    JSON.parse(response.body)['token']
+  }
   let(:valid_headers) {
-    {}
+    {"Authorization" => token }
   }
 
   describe "GET /index" do
@@ -45,7 +47,7 @@ RSpec.describe "/api/v1/authors", type: :request do
   describe "GET /show" do
     it "renders a successful response" do
       author = Author.create! valid_attributes
-      get api_v1_authors_url(author), as: :json
+      get api_v1_authors_url(author), headers: valid_headers, as: :json
       expect(response).to be_successful
     end
   end
@@ -71,7 +73,7 @@ RSpec.describe "/api/v1/authors", type: :request do
       it "does not create a new Author" do
         expect {
           post api_v1_authors_url,
-               params: { author: invalid_attributes }, as: :json
+               params: { author: invalid_attributes }, headers: valid_headers, as: :json
         }.to change(Author, :count).by(0)
       end
 
