@@ -6,7 +6,7 @@ RSpec.describe "/login", type: :request do
     {:email => "admin@email.com", :password => "123456"}
   }
 
-  describe "GET /index" do
+  describe "POST /login" do
     before(:each) do
       @user = User.new user_params
     end
