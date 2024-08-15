@@ -18,7 +18,7 @@ RSpec.describe "/api/v1/books", type: :request do
   # adjust the attributes here as well.
   let(:valid_attributes) {
     #skip("Add a hash of attributes valid for your model")
-    {"title"=>"foo", "body"=>"foo"}
+    {"title"=>"foo", "body"=>"foo", "author_id" => "1"}
   }
 
   let(:invalid_attributes) {

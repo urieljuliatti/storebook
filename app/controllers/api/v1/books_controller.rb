@@ -16,7 +16,7 @@ class Api::V1::BooksController < ApplicationController
   # POST /books
   def create
     @book = Book.new(book_params)
-
+    @book.author_id = params[:author_id]
     if @book.save
       render json: @book, status: :created, location: api_v1_book_url(@book)
     else
