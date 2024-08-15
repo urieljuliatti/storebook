@@ -17,11 +17,12 @@ RSpec.describe "/api/v1/books", type: :request do
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    #skip("Add a hash of attributes valid for your model")
+    {"title"=>"foo", "body"=>"foo"}
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {"title"=>"", "body"=>"foo"}
   }
 
   # This should return the minimal set of values that should be in the headers
@@ -85,7 +86,7 @@ RSpec.describe "/api/v1/books", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {"title"=>"foo 2", "body"=>"foo"}
       }
 
       it "updates the requested book" do
@@ -93,7 +94,7 @@ RSpec.describe "/api/v1/books", type: :request do
         patch api_v1_book_url(book),
               params: { book: new_attributes }, headers: valid_headers, as: :json
         book.reload
-        skip("Add assertions for updated state")
+        expect(response).to have_http_status(:ok)
       end
 
       it "renders a JSON response with the book" do
@@ -108,6 +109,7 @@ RSpec.describe "/api/v1/books", type: :request do
     context "with invalid parameters" do
       it "renders a JSON response with errors for the book" do
         book = Book.create! valid_attributes
+
         patch api_v1_book_url(book),
               params: { book: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
