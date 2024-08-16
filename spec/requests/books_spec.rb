@@ -6,10 +6,11 @@ RSpec.describe 'Books', type: :request do
     @author = Author.create(name: 'Fulano')
     {'title'=>'foo', 'body'=>'foo', 'author_id' => @author.id }
   }
-
+  before(:each) do
+    @book = Book.create! valid_attributes
+  end
   describe 'GET /index' do
     it 'renders a successful response' do
-      book = Book.create! valid_attributes
       get books_url, as: :json
       expect(response).to be_successful
     end
@@ -17,8 +18,7 @@ RSpec.describe 'Books', type: :request do
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      book = Book.create! valid_attributes
-      get book_url(book), as: :json
+      get book_url(@book), as: :json
       expect(response).to be_successful
     end
   end
