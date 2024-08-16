@@ -1,32 +1,46 @@
 require 'rails_helper'
 
-RSpec.describe "/login", type: :request do
+RSpec.describe '/login', type: :request do
 
-  let(:user_params) {
-    {:email => "admin@email.com", :password => "123456"}
-  }
+  let!(:user) { create(:user, email: 'test@example.com', password: 'password123') }
 
-  describe "POST /login" do
-    before(:each) do
-      @user = User.new user_params
+  describe 'POST /login' do
+    let(:login_params) { { email: 'test@example.com', password: 'password123' } }
+
+    context 'when the credentials are valid' do
+      it 'returns a JWT token' do
+        post '/login', params: login_params, as: :json
+
+        expect(response).to have_http_status(:ok)
+        expect(response.content_type).to include('application/json')
+
+        json_response = JSON.parse(response.body)
+        expect(json_response['token']).not_to be_nil
+      end
     end
 
-    it "renders a successful response" do
-      headers = { "ACCEPT" => "application/json" }
+    context 'when the credentials are invalid' do
+      it 'returns an unauthorized error' do
+        invalid_params = { email: 'test@example.com', password: 'wrongpassword' }
+        post '/login', params: invalid_params, as: :json
 
-      user = User.create! user_params
-      post "/login", :params => {:email => @user.email, :password => @user.password }, :headers => headers
-      expect(response.content_type).to eq("application/json; charset=utf-8")
-      expect(JSON.parse(response.body)['token']).to_not be_nil
-      expect(response).to have_http_status(:ok)
-    end
-    it "renders an error response" do
-      headers = { "ACCEPT" => "application/json" }
+        expect(response).to have_http_status(:unauthorized)
+        expect(response.content_type).to include('application/json')
 
-      post "/login", :params => {:email => @user.email, :password => "123" }, :headers => headers
-      expect(response.content_type).to eq("application/json; charset=utf-8")
-      expect(JSON.parse(response.body)['token']).to be_nil
-      expect(response).to have_http_status(:unauthorized)
+        json_response = JSON.parse(response.body)
+        expect(json_response['error']).to eq('Invalid email or password')
+      end
+
+      it 'returns an unauthorized error if the email does not exist' do
+        invalid_params = { email: 'nonexistent@example.com', password: 'password123' }
+        post '/login', params: invalid_params, as: :json
+
+        expect(response).to have_http_status(:unauthorized)
+        expect(response.content_type).to include('application/json')
+
+        json_response = JSON.parse(response.body)
+        expect(json_response['error']).to eq('Invalid email or password')
+      end
     end
   end
 end
