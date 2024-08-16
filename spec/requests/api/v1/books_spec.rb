@@ -125,5 +125,10 @@ RSpec.describe '/api/v1/books', type: :request do
       }.not_to change(Book, :count)
       expect(response).to have_http_status(:not_found)
     end
+
+    it 'returns a successful response' do
+      delete api_v1_book_url(book), headers: valid_headers, as: :json
+      expect(response).to have_http_status(:no_content)
+    end
   end
 end
