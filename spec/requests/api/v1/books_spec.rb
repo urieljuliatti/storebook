@@ -7,6 +7,8 @@ RSpec.describe '/api/v1/books', type: :request do
 
   let!(:author) { create(:author, name: 'John Doe') }
 
+  let!(:book) { Book.create!(valid_attributes) }
+
   let(:valid_attributes) {
     {'title'=>'foo', 'body'=>'foo', 'author_id' => author.id }
   }
@@ -39,7 +41,6 @@ RSpec.describe '/api/v1/books', type: :request do
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      book = Book.create! valid_attributes
       get api_v1_book_url(book), headers: valid_headers, as: :json
       expect(response).to be_successful
     end
@@ -86,7 +87,6 @@ RSpec.describe '/api/v1/books', type: :request do
       }
 
       it 'updates the requested book' do
-        book = Book.create! valid_attributes
         patch api_v1_book_url(book),
               params: { book: new_attributes }, headers: valid_headers, as: :json
         book.reload
@@ -94,7 +94,6 @@ RSpec.describe '/api/v1/books', type: :request do
       end
 
       it 'renders a JSON response with the book' do
-        book = Book.create! valid_attributes
         patch api_v1_book_url(book),
               params: { book: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
@@ -104,8 +103,6 @@ RSpec.describe '/api/v1/books', type: :request do
 
     context 'with invalid parameters' do
       it 'renders a JSON response with errors for the book' do
-        book = Book.create! valid_attributes
-
         patch api_v1_book_url(book),
               params: { book: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
@@ -115,11 +112,18 @@ RSpec.describe '/api/v1/books', type: :request do
   end
 
   describe 'DELETE /destroy' do
+
     it 'destroys the requested book' do
-      book = Book.create! valid_attributes
       expect {
         delete api_v1_book_url(book), headers: valid_headers, as: :json
       }.to change(Book, :count).by(-1)
+    end
+
+    it 'returns a 404 status if the book does not exist' do
+      expect {
+        delete api_v1_book_url(id: 'non-existent-id'), headers: valid_headers, as: :json
+      }.not_to change(Book, :count)
+      expect(response).to have_http_status(:not_found)
     end
   end
 end
