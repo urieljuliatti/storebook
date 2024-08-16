@@ -27,12 +27,18 @@ RSpec.describe '/api/v1/books', type: :request do
     {'title'=>'', 'body'=>'foo'}
   }
 
-  # This should return the minimal set of values that should be in the headers
-  # in order to pass any filters (e.g. authentication) defined in
-  # BooksController, or in your router and rack
-  # middleware. Be sure to keep this updated too.
+  let(:user_params) {
+    {:email => "admin@email.com", :password => "123456"}
+  }
+
+  let(:token) {
+    @user = User.create user_params
+    headers = { "ACCEPT" => "application/json" }
+    post "/login", :params => {:email => @user.email, :password => @user.password }, :headers => headers
+    JSON.parse(response.body)['token']
+  }
   let(:valid_headers) {
-    {}
+    {"Authorization" => token }
   }
 
   describe 'GET /index' do
@@ -46,7 +52,7 @@ RSpec.describe '/api/v1/books', type: :request do
   describe 'GET /show' do
     it 'renders a successful response' do
       book = Book.create! valid_attributes
-      get api_v1_book_url(book), as: :json
+      get api_v1_book_url(book), headers: valid_headers, as: :json
       expect(response).to be_successful
     end
   end
@@ -72,7 +78,7 @@ RSpec.describe '/api/v1/books', type: :request do
       it 'does not create a new Book' do
         expect {
           post api_v1_books_url,
-               params: { book: invalid_attributes }, as: :json
+               params: { book: invalid_attributes }, headers: valid_headers, as: :json
         }.to change(Book, :count).by(0)
       end
 
