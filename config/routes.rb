@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   post 'login', to: 'authentication#login'
   get '/books/:id', to: 'books#show', as: 'book'
+  get '/books', to: 'books#index', as: 'books'
 
   namespace :api do
     namespace :v1 do
