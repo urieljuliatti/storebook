@@ -19,7 +19,6 @@ RSpec.describe '/api/v1/books', type: :request do
 
   let(:valid_attributes) {
     @author = Author.create(name: 'Fulano')
-    #skip('Add a hash of attributes valid for your model')
     {'title'=>'foo', 'body'=>'foo', 'author_id' => @author.id }
   }
 
