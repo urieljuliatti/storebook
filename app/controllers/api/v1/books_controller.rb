@@ -41,6 +41,6 @@ class Api::V1::BooksController < AdminController
     end
 
     def book_params
-      params.require(:book).permit(:title, :body, :description, :price)
+      params.require(:book).permit(:title, :body, :description, :price, :author_id)
     end
 end

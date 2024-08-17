@@ -3,21 +3,20 @@
 require 'rails_helper'
 
 RSpec.describe '/api/v1/books', type: :request do
-
   let!(:author) { create(:author, name: 'John Doe') }
 
   let!(:book) { Book.create!(valid_attributes) }
 
   let(:valid_attributes) {
-    {'title'=>'foo', 'body'=>'foo', 'description' => 'this is a description', 'price' => '20', 'author_id' => author.id }
+    { 'title' => 'foo', 'body' => 'foo', 'description' => 'this is a description', 'price' => '20', 'author_id' => author.id }
   }
 
   let(:invalid_attributes) {
-    {'title'=>'', 'body'=>'foo'}
+    {'title' => '', 'body' => 'foo'}
   }
 
   let(:user_params) {
-    {:email => "admin@email.com", :password => "123456"}
+    {:email => 'admin@email.com', :password => '123456'}
   }
 
   let(:token) do
@@ -81,9 +80,7 @@ RSpec.describe '/api/v1/books', type: :request do
 
   describe 'PATCH /update' do
     context 'with valid parameters' do
-      let(:new_attributes) {
-        {'title'=>'foo 2', 'body'=>'foo'}
-      }
+      let(:new_attributes) { { 'title' => 'foo 2', 'body' => 'foo' } }
 
       it 'updates the requested book' do
         patch api_v1_book_url(book),
@@ -111,7 +108,6 @@ RSpec.describe '/api/v1/books', type: :request do
   end
 
   describe 'DELETE /destroy' do
-
     it 'destroys the requested book' do
       expect {
         delete api_v1_book_url(book), headers: valid_headers, as: :json
