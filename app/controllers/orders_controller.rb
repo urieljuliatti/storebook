@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show]
 
   def index
-    @orders = Order.where(user: current_user)
+    @user = User.find(params[:user_id])
+    @orders = Order.where(user: @user)
     render json: @orders
   end
 
@@ -14,7 +15,8 @@ class OrdersController < ApplicationController
 
   def create
     @cart = Cart.find(params[:cart_id])
-    @order = Order.new(total_price: @cart.total_price, status: 'pendente', user: current_user)
+    @user = User.find(params[:user_id])
+    @order = Order.new(total_price: @cart.total_price, status: 'pendente', user: @user)
 
     if @order.save
       @cart.destroy

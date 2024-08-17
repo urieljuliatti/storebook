@@ -10,7 +10,8 @@ class CartsController < ApplicationController
 
   # Cria um novo carrinho para o usuário (opcional, caso não exista um)
   def create
-    @cart = current_user.carts.create(total_price: 0)
+    @user = User.find(params[:user_id])
+    @cart = @user.carts.create(total_price: 0)
     render json: @cart, status: :created
   end
 
@@ -44,7 +45,8 @@ class CartsController < ApplicationController
   private
 
   def set_cart
-    @cart = current_user.carts.find(params[:id])
+    @user = User.find(params[:user_id])
+    @cart = @user.carts.find(params[:id])
   end
 
   def update_total_price

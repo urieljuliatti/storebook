@@ -10,16 +10,12 @@ RSpec.describe 'Orders API', type: :request do
   let!(:cart_item) { create(:cart_item, cart: cart, book: book, quantity: 5) }
   let(:headers) { { 'ACCEPT' => 'application/json' } }
 
-  before do
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-  end
-
   describe 'GET /orders' do
     it 'returns a list of orders for the current user' do
       create(:order, user: user, total_price: 50.0, status: 'pendente')
       create(:order, user: user, total_price: 100.0, status: 'completed')
 
-      get '/orders', headers: headers
+      get '/orders', params: { user_id: user.id }, headers: headers
       expect(response).to have_http_status(:success)
 
       orders = json
@@ -43,7 +39,7 @@ RSpec.describe 'Orders API', type: :request do
 
   describe 'POST /orders' do
     it 'creates a new order and destroys the cart' do
-      post '/orders', params: { cart_id: cart.id }, headers: headers
+      post '/orders', params: { cart_id: cart.id, user_id: user.id }, headers: headers
       expect(response).to have_http_status(:created)
 
       order = json
