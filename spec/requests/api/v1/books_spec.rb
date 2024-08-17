@@ -1,16 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe '/api/v1/books', type: :request do
-  # This should return the minimal set of attributes required to create a valid
-  # Book. As you add validations to Book, be sure to
-  # adjust the attributes here as well.
+
 
   let!(:author) { create(:author, name: 'John Doe') }
 
   let!(:book) { Book.create!(valid_attributes) }
 
   let(:valid_attributes) {
-    {'title'=>'foo', 'body'=>'foo', 'description' => 'this is a description', 'price' => 10.00, 'author_id' => author.id }
+    {'title'=>'foo', 'body'=>'foo', 'description' => 'this is a description', 'price' => '20', 'author_id' => author.id }
   }
 
   let(:invalid_attributes) {
