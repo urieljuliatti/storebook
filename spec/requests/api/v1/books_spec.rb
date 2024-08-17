@@ -10,7 +10,7 @@ RSpec.describe '/api/v1/books', type: :request do
   let!(:book) { Book.create!(valid_attributes) }
 
   let(:valid_attributes) {
-    {'title'=>'foo', 'body'=>'foo', 'description' => 'this is a description', 'author_id' => author.id }
+    {'title'=>'foo', 'body'=>'foo', 'description' => 'this is a description', 'price' => 10.00, 'author_id' => author.id }
   }
 
   let(:invalid_attributes) {

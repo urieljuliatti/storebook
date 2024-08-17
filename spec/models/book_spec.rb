@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Book, type: :model do
 
-  it "is valid with a title and an author" do
+  it "is valid with a title, description, price and an author" do
     author = Author.create!(name: "J.K. Rowling")
-    book = Book.new(title: "Harry Potter and the Sorcerer's Stone", author: author)
+    book = Book.new(title: "Harry Potter and the Sorcerer's Stone", description: "This is the description", price: 20.00, author: author)
     expect(book).to be_valid
   end
 
