@@ -45,6 +45,6 @@ class Api::V1::AuthorsController < AdminController
 
     # Only allow a list of trusted parameters through.
     def author_params
-      params.require(:author).permit(:name)
+      params.require(:author).permit(:name, :bio)
     end
 end

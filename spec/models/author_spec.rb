@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Author, type: :model do
 
   it "is valid with a name" do
-    author = Author.new(name: "J.K. Rowling")
+    author = Author.new(name: "J.K. Rowling", bio: "This is a bio")
     expect(author).to be_valid
   end
 
