@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     post 'add_item/:book_id', to: 'carts#add_item', as: 'add_item'
     delete 'remove_item/:book_id', to: 'carts#remove_item', as: 'remove_item'
   end
+  resources :orders, only: [:index, :show, :create]
 
   namespace :api do
     namespace :v1 do
