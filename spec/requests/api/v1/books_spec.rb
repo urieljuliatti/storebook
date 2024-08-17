@@ -49,13 +49,13 @@ RSpec.describe '/api/v1/books', type: :request do
       it 'creates a new Book' do
         expect {
           post api_v1_books_url,
-               params: { book: valid_attributes }, headers: valid_headers, as: :json
+               params: { book: valid_attributes, author_id: author.id }, headers: valid_headers, as: :json
         }.to change(Book, :count).by(1)
       end
 
       it 'renders a JSON response with the new book' do
         post api_v1_books_url,
-             params: { book: valid_attributes }, headers: valid_headers, as: :json
+             params: { book: valid_attributes, author_id: author.id }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
