@@ -15,7 +15,7 @@ require 'rails_helper'
 RSpec.describe "/api/v1/authors", type: :request do
 
   let(:valid_attributes) {
-    {"name"=>"Fulano"}
+    {"name"=>"Fulano", "bio" => "This is a bio"}
   }
 
   let(:invalid_attributes) {
