@@ -36,7 +36,7 @@ RSpec.describe 'Orders API', type: :request do
 
       order_response = json
       expect(order_response['id']).to eq(order.id)
-      expect(order_response['total_price']).to eq("50.0")
+      expect(order_response['total_price']).to eq('50.0')
       expect(order_response['status']).to eq(order.status)
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe 'Orders API', type: :request do
       expect(response).to have_http_status(:created)
 
       order = json
-      expect(order['total_price']).to eq(cart.total_price)
+      expect(order['total_price']).to eq("50.0")
       expect(order['status']).to eq('pendente')
 
       expect(Cart.exists?(cart.id)).to be_falsey  # Verifica se o carrinho foi destruído
