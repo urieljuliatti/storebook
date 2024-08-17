@@ -28,7 +28,6 @@ RSpec.describe 'Carts API', type: :request do
     end
   end
 
-
   describe 'POST /carts/:id/add_item' do
     it 'adds an item to the cart' do
       post "/carts/#{cart.id}/add_item", params: { book_id: book.id, user_id: user.id }, headers: headers
