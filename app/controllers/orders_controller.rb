@@ -16,11 +16,6 @@ class OrdersController < ApplicationController
     @cart = Cart.find(params[:cart_id])
     @order = Order.new(total_price: @cart.total_price, status: 'pendente', user: current_user)
 
-    if @cart.nil?
-      render json: { error: 'Cart not found' }, status: :unprocessable_entity
-      return
-    end
-
     if @order.save
       @cart.destroy
       render json: @order, status: :created
