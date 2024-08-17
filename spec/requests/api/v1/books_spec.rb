@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe '/api/v1/books', type: :request do
-
 
   let!(:author) { create(:author, name: 'John Doe') }
 

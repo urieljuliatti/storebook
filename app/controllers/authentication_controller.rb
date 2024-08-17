@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthenticationController < ApplicationController
   def login
     user = User.find_by(email: params[:email])

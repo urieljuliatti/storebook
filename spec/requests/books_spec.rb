@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Books', type: :request do
 
   let(:valid_attributes) {
     @author = Author.create(name: 'Fulano')
-    {'title'=>'foo', 'body'=>'foo', 'author_id' => @author.id }
+    {'title'=>'foo', 'body'=>'foo', 'author_id' => @author.id, 'price' => '10.00' }
   }
   before(:each) do
     @book = Book.create! valid_attributes

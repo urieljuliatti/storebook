@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::BooksController < AdminController
   before_action :set_book, only: %i[ show update destroy ]
 

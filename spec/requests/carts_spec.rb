@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Carts API', type: :request do
@@ -17,7 +19,7 @@ RSpec.describe 'Carts API', type: :request do
 
       get "/carts/#{cart.id}", headers: headers
       expect(response).to have_http_status(:success)
-      expect(json['total_price']).to eq("20.0")
+      expect(json['total_price']).to eq('20.0')
       expect(json['books']).not_to be_empty
     end
   end
