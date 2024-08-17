@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :order do
-    user { nil }
-    total_price { '9.99' }
-    status { 'MyString' }
+    user
+    total_price { 100.0 }
+    status { 'pendente' }
   end
 end
