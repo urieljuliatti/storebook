@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "574e6585-7c86-4267-94ed-0f144748e449",
+		"name": "bookstore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "4197184",
+		"_collection_link": "https://solar-desert-696807.postman.co/workspace/Login-Api~6ecdfc9c-e0ab-4904-b3d8-6863f7276c60/collection/4197184-574e6585-7c86-4267-94ed-0f144748e449?action=share&source=collection_link&creator=4197184"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.AUPRxa_ZSuOp3yNbnl-vTdsVeafK5ec71QzLa9hb3qQ"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/login"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \n    \"user\": {\n        \"email\": \"admin@example.com\",\n        \"password\": \"123456\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/users"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/books"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/books/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/books/2"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/v1/books",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.AUPRxa_ZSuOp3yNbnl-vTdsVeafK5ec71QzLa9hb3qQ"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/api/v1/books"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/v1/books",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.AUPRxa_ZSuOp3yNbnl-vTdsVeafK5ec71QzLa9hb3qQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"book\":{\n        \"title\": \"Rails Docker\",\n        \"body\": \"This is Rails Docker Body\",\n        \"description\": \"This is Rails Docker description\",\n        \"price\": 200\n    },\n    \"author_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/api/v1/books"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/v1/books/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.AUPRxa_ZSuOp3yNbnl-vTdsVeafK5ec71QzLa9hb3qQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"book\":{\n        \"title\": \"Rails Rspec\",\n        \"body\": \"This is Rails Rspec Body\",\n        \"description\": \"This is Rails Rspec description\",\n        \"price\": 20\n    },\n    \"author_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/api/v1/books/2"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/v1/books/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:3000/api/v1/books/1"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/v1/authors/1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.AUPRxa_ZSuOp3yNbnl-vTdsVeafK5ec71QzLa9hb3qQ",
+						"type": "text"
+					}
+				],
+				"url": "localhost:3000/api/v1/authors/1"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/v1/authors",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.AUPRxa_ZSuOp3yNbnl-vTdsVeafK5ec71QzLa9hb3qQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"author\":{\n        \"name\": \"Fulano\",\n        \"bio\": \"This is Fulano Bio\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/api/v1/authors"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/v1/authors/1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.AUPRxa_ZSuOp3yNbnl-vTdsVeafK5ec71QzLa9hb3qQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"author\":{\n        \"name\": \"Fulano 2\",\n        \"bio\": \"This is Fulano 2 Bio\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/api/v1/authors/1"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/v1/authors/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.AUPRxa_ZSuOp3yNbnl-vTdsVeafK5ec71QzLa9hb3qQ"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:3000/api/v1/authors/1"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/carts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/carts"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/carts/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/carts/2"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000//carts/1/add_item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"book_id\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000//carts/4/add_item"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000//carts/1/remove_item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"book_id\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000//carts/2/remove_item"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/orders/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart_id\": 4,\n    \"user_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/orders/"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/orders/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/orders/4"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.AUPRxa_ZSuOp3yNbnl-vTdsVeafK5ec71QzLa9hb3qQ"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
