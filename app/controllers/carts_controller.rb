@@ -18,6 +18,7 @@ class CartsController < ApplicationController
   def add_item
     book = Book.find(params[:book_id])
     cart_item = @cart.cart_items.find_or_initialize_by(book: book)
+    cart_item.quantity = 0
     cart_item.quantity += 1
     cart_item.save
     update_total_price
