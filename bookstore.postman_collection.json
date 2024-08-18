@@ -218,7 +218,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:3000/carts",
+			"name": "localhost:3000/api/v1/carts",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -231,12 +231,12 @@
 						}
 					}
 				},
-				"url": "localhost:3000/carts"
+				"url": "localhost:3000/api/v1/carts"
 			},
 			"response": []
 		},
 		{
-			"name": "localhost:3000/carts/1",
+			"name": "localhost:3000/api/v1/carts/1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -252,12 +252,12 @@
 						}
 					}
 				},
-				"url": "localhost:3000/carts/2"
+				"url": "localhost:3000/api/v1/carts/2"
 			},
 			"response": []
 		},
 		{
-			"name": "localhost:3000//carts/1/add_item",
+			"name": "localhost:3000/api/v1/carts/1/add_item",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -270,12 +270,12 @@
 						}
 					}
 				},
-				"url": "localhost:3000//carts/4/add_item"
+				"url": "localhost:3000/api/v1/carts/4/add_item"
 			},
 			"response": []
 		},
 		{
-			"name": "localhost:3000//carts/1/remove_item",
+			"name": "localhost:3000/api/v1/carts/1/remove_item",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -288,30 +288,30 @@
 						}
 					}
 				},
-				"url": "localhost:3000//carts/2/remove_item"
+				"url": "localhost:3000/api/v1/carts/2/remove_item"
 			},
 			"response": []
 		},
 		{
-			"name": "localhost:3000/orders/",
+			"name": "localhost:3000/api/v1/orders/",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"cart_id\": 4,\n    \"user_id\": 1\n}",
+					"raw": "{\n    \"cart_id\": 5,\n    \"user_id\": 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:3000/orders/"
+				"url": "localhost:3000/api/v1/orders/"
 			},
 			"response": []
 		},
 		{
-			"name": "localhost:3000/orders",
+			"name": "localhost:3000/api/v1/orders",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -327,16 +327,16 @@
 						}
 					}
 				},
-				"url": "localhost:3000/orders"
+				"url": "localhost:3000/api/v1/orders"
 			},
 			"response": []
 		},
 		{
-			"name": "localhost:3000/orders/1",
+			"name": "localhost:3000/api/v1/orders/1",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "localhost:3000/orders/4"
+				"url": "localhost:3000/api/v1/orders/4"
 			},
 			"response": []
 		}
