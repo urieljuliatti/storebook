@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CartsController < ApplicationController
+class Api::V1::CartsController < AdminController
   before_action :set_cart, only: [:show, :add_item, :remove_item]
 
   # Exibe o carrinho atual do usuário
@@ -10,8 +10,7 @@ class CartsController < ApplicationController
 
   # Cria um novo carrinho para o usuário (opcional, caso não exista um)
   def create
-    @user = User.find(params[:user_id])
-    @cart = @user.carts.create(total_price: 0)
+    @cart = @current_user.carts.create(total_price: 0)
     render json: @cart, status: :created
   end
 

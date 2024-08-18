@@ -5,7 +5,6 @@ class Api::V1::AuthorsController < AdminController
   # GET /authors
   def index
     @authors = Author.all
-
     render json: @authors
   end
 
