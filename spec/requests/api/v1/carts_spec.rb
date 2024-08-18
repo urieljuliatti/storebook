@@ -12,7 +12,6 @@ RSpec.describe 'Carts API', type: :request do
   }
 
   let(:token) do
-    user = create(:user, **user_params)
     post '/login', params: { email: user.email, password: user.password }, as: :json
     JSON.parse(response.body)['token']
   end
