@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post 'login', to: 'authentication#login'
   resources :books, only: [:index, :show]
 
-  resources :orders, only: [:index, :show, :create]
+
 
   namespace :api do
     namespace :v1 do
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
           post 'remove_item'
         end
       end
+      resources :orders, only: [:index, :show, :create]
     end
   end
 end

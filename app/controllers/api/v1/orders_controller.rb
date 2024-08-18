@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-class OrdersController < ApplicationController
+class Api::V1::OrdersController < AdminController
   before_action :set_order, only: [:show]
 
   def index
-    @user = User.find(params[:user_id])
-    @orders = Order.where(user: @user)
+    @orders = Order.where(user: @current_user)
     render json: @orders
   end
 
@@ -15,8 +14,7 @@ class OrdersController < ApplicationController
 
   def create
     @cart = Cart.find(params[:cart_id])
-    @user = User.find(params[:user_id])
-    @order = Order.new(total_price: @cart.total_price, status: 'pendente', user: @user)
+    @order = Order.new(total_price: @cart.total_price, status: 'pendente', user: @current_user)
 
     if @order.save
       @cart.destroy

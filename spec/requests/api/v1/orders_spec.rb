@@ -8,14 +8,22 @@ RSpec.describe 'Orders API', type: :request do
   let(:author) { create(:author) }
   let(:book) { create(:book, price: 10.0, author_id: author.id) }
   let!(:cart_item) { create(:cart_item, cart: cart, book: book, quantity: 5) }
-  let(:headers) { { 'ACCEPT' => 'application/json' } }
+  let(:user_params) {
+    {:email => 'admin@email.com', :password => '123456'}
+  }
+  let(:token) do
+    user = create(:user, **user_params)
+    post '/login', params: { email: user.email, password: user.password }, as: :json
+    JSON.parse(response.body)['token']
+  end
+  let(:headers) { { 'ACCEPT' => 'application/json', 'Authorization' => "Bearer #{token}" } }
 
-  describe 'GET /orders' do
+  describe 'GET /api/v1/orders' do
     it 'returns a list of orders for the current user' do
       create(:order, user: user, total_price: 50.0, status: 'pendente')
       create(:order, user: user, total_price: 100.0, status: 'completed')
 
-      get '/orders', params: { user_id: user.id }, headers: headers
+      get '/api/v1/orders', params: { user_id: user.id }, headers: headers
       expect(response).to have_http_status(:success)
 
       orders = json
@@ -23,11 +31,11 @@ RSpec.describe 'Orders API', type: :request do
     end
   end
 
-  describe 'GET /orders/:id' do
+  describe 'GET /api/v1/orders/:id' do
     let!(:order) { create(:order, user: user, total_price: 50.0, status: 'pendente') }
 
     it 'returns the specified order' do
-      get "/orders/#{order.id}", headers: headers
+      get "/api/v1/orders/#{order.id}", headers: headers
       expect(response).to have_http_status(:success)
 
       order_response = json
@@ -37,9 +45,9 @@ RSpec.describe 'Orders API', type: :request do
     end
   end
 
-  describe 'POST /orders' do
+  describe 'POST /api/v1/orders' do
     it 'creates a new order and destroys the cart' do
-      post '/orders', params: { cart_id: cart.id, user_id: user.id }, headers: headers
+      post '/api/v1/orders', params: { cart_id: cart.id, user_id: user.id }, headers: headers
       expect(response).to have_http_status(:created)
 
       order = json
@@ -50,7 +58,7 @@ RSpec.describe 'Orders API', type: :request do
     end
 
     it 'does not create an order if the cart is not found' do
-      post '/orders', params: { cart_id: 99999 }, headers: headers
+      post '/api/v1/orders', params: { cart_id: 99999 }, headers: headers
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end
