@@ -8,9 +8,6 @@ RSpec.describe 'Orders API', type: :request do
   let(:author) { create(:author) }
   let(:book) { create(:book, price: 10.0, author_id: author.id) }
   let!(:cart_item) { create(:cart_item, cart: cart, book: book, quantity: 5) }
-  let(:user_params) {
-    {:email => 'admin@email.com', :password => '123456'}
-  }
   let(:token) do
     post '/login', params: { email: user.email, password: user.password }, as: :json
     JSON.parse(response.body)['token']
