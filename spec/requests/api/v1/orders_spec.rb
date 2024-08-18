@@ -12,7 +12,6 @@ RSpec.describe 'Orders API', type: :request do
     {:email => 'admin@email.com', :password => '123456'}
   }
   let(:token) do
-    user = create(:user, **user_params)
     post '/login', params: { email: user.email, password: user.password }, as: :json
     JSON.parse(response.body)['token']
   end
